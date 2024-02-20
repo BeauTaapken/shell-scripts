@@ -16,7 +16,7 @@ X=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
 if ((0<=X && X<=25))
 then
   setfan 20
-elif ((36<=X && X<=50))
+elif ((40<=X && X<=50))
 then
   setfan 40
 elif ((51<=X && X<=100))
