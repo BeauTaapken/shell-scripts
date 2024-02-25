@@ -1,6 +1,6 @@
 #!/bin/env bash
 # Change "j" for your sudo password
-source ./.env
+source /mnt/crucial-ssd/shell-scripts/.env
 
 # Function
 setfan() {
@@ -16,10 +16,13 @@ X=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
 if ((0<=X && X<=25))
 then
   setfan 20
-elif ((40<=X && X<=50))
+elif ((40<=X && X<=44))
 then
   setfan 40
-elif ((51<=X && X<=100))
+elif ((45<=X && X<=49))
+then
+  setfan 55
+elif ((50<=X && X<=100))
 then
   setfan 100
 fi
