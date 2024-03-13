@@ -1,5 +1,4 @@
 #!/bin/env bash
-# Change "j" for your sudo password
 source /mnt/crucial-ssd/shell-scripts/.env
 
 # Function
