@@ -8,13 +8,13 @@ setfan() {
   xhost -si:localuser:root
 }
 
-# Change 'setfan' parameter for speed % and 'X' intervals for temperature boundaries
+# Change 'setfan' parameter for speed % and 'X' intervals for temperature boundaries, keep in mind, the minimum value is 30 (cus fuck me for wanting slower fan speed, I guess)
 for(( ; ; ))
 do
 X=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
-if ((0<=X && X<=25))
+if ((0<=X && X<=40))
 then
-  setfan 20
+  setfan 30
 elif ((40<=X && X<=44))
 then
   setfan 40
