@@ -12,9 +12,9 @@ setfan() {
 for(( ; ; ))
 do
 X=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
-if ((0<=X && X<=40))
+if ((0<=X && X<=39))
 then
-  setfan 30
+  setfan 35
 elif ((40<=X && X<=44))
 then
   setfan 40
@@ -26,5 +26,5 @@ then
   setfan 100
 fi
 
-sleep 10
+sleep 5
 done
