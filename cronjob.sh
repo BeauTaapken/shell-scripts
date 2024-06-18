@@ -7,6 +7,6 @@ $config commit -m "automatic push"
 $config push -u origin main
 
 cd ~/.config/nvim/
-git add .
-git commit -m "automatic push"
-git push -u origin main
+/usr/bin/git add .
+/usr/bin/git commit -m "automatic push"
+/usr/bin/git push -u origin main
