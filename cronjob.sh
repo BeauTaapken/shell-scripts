@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+~='/home/beau'
+
 config='/usr/bin/git --git-dir=/home/beau/.cfg/ --work-tree=/home/beau'
 
 $config add -u
