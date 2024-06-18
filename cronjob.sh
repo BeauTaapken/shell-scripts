@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-cd /home/beau/.config/nvim/
-/usr/bin/git add .
-/usr/bin/git commit -m "automatic push"
-/usr/bin/git push
+cd ~/.config/nvim/
+git add .
+git commit -m "automatic push"
+git push
 
 config='/usr/bin/git --git-dir=/home/beau/.cfg/ --work-tree=/home/beau'
 
