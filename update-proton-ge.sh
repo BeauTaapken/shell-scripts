@@ -19,21 +19,21 @@ sha512sum -c ./*.sha512sum
 # make steam directory if it does not exist
 mkdir -p ~/.steam/root/compatibilitytools.d
 
-# fpath=`find /tmp/proton-ge-custom -type f -name "GE-Proton*.tar.gz" -exec basename {} \;`
-# for fnd in $fpath
-# do
-#     protonMajorVersion=`echo $fpath | cut -d - -f 1-2`
-#     echo "$fnd"
-#     echo "$protonMajorVersion"
-# done
-#
-# fpath=`find ~/.steam/root/compatibilitytools.d/ -type d -name "$protonMajorVersion*"`
-# for fnd in $fpath
-# do
-#     rm -ri $fnd
-#     echo "found a path"
-#     echo "$fnd"
-# done
+fpath=`find /tmp/proton-ge-custom -type f -name "GE-Proton*.tar.gz" -exec basename {} \;`
+for fnd in $fpath
+do
+    protonMajorVersion=`echo $fpath | cut -d - -f 1-2`
+    echo "$fnd"
+    echo "$protonMajorVersion"
+done
+
+fpath=`find ~/.steam/root/compatibilitytools.d/ -type d -name "$protonMajorVersion*"`
+for fnd in $fpath
+do
+    rm -ri $fnd
+    echo "found a path"
+    echo "$fnd"
+done
 
 # extract proton tarball to steam directory
 tar -xf GE-Proton*.tar.gz -C ~/.steam/root/compatibilitytools.d/
