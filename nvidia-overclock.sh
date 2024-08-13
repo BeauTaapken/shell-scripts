@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-source /mnt/crucial-ssd/shell-scripts/.env
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+source ${SCRIPT_DIR}/.env
+
 
 wattage=$(nvidia-smi -q -d POWER | grep 'Max Power Limit' | grep ' W' | sed -z 's/Max Power Limit                   : //g; s/ W//g;')
 

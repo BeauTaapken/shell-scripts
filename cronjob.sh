@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-cd ~/.config/nvim/
+pushd ~/.config/nvim/
 git add .
 git commit -m "automatic push"
 git push
+popd
 
 config='/usr/bin/git --git-dir=/home/beau/.cfg/ --work-tree=/home/beau'
 

@@ -2,16 +2,17 @@
 set -euo pipefail
 
 # make temp working directory
-rm -r /tmp/proton-ge-custom
-mkdir /tmp/proton-ge-custom
+rm -r /tmp/proton-ge-custom || mkdir /tmp/proton-ge-custom
 cd /tmp/proton-ge-custom
 
 # download  tarball
 curl -sLOJ "$(curl -s https://api.github.com/repos/GloriousEggroll/proton-ge-custom/releases/latest | grep browser_download_url | cut -d\" -f4 | grep .tar.gz)"
 
+echo "Downloading latest proton-GE"
 # download checksum
 curl -sLOJ "$(curl -s https://api.github.com/repos/GloriousEggroll/proton-ge-custom/releases/latest | grep browser_download_url | cut -d\" -f4 | grep .sha512sum)"
 
+echo "Checking tarball checksum"
 # check tarball with checksum
 sha512sum -c ./*.sha512sum
 # if result is ok, continue
@@ -23,16 +24,12 @@ fpath=`find /tmp/proton-ge-custom -type f -name "GE-Proton*.tar.gz" -exec basena
 for fnd in $fpath
 do
     protonMajorVersion=`echo $fpath | cut -d - -f 1-2`
-    echo "$fnd"
-    echo "$protonMajorVersion"
 done
 
 fpath=`find ~/.steam/root/compatibilitytools.d/ -type d -name "$protonMajorVersion*"`
 for fnd in $fpath
 do
     rm -ri $fnd
-    echo "found a path"
-    echo "$fnd"
 done
 
 # extract proton tarball to steam directory
