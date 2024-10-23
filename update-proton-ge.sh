@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # make temp working directory
-rm -r /tmp/proton-ge-custom || mkdir /tmp/proton-ge-custom
+rm -r /tmp/proton-ge-custom || true
+mkdir /tmp/proton-ge-custom
 cd /tmp/proton-ge-custom
 
 # download  tarball
@@ -29,8 +30,9 @@ done
 fpath=`find ~/.steam/root/compatibilitytools.d/ -type d -name "$protonMajorVersion*"`
 for fnd in $fpath
 do
-    rm -ri $fnd
+    rm -r $fnd
 done
+
 
 # extract proton tarball to steam directory
 tar -xf GE-Proton*.tar.gz -C ~/.steam/root/compatibilitytools.d/
