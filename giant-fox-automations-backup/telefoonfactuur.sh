@@ -1,4 +1,5 @@
-source ./.env
+CURDIR=$(dirname "$0")
+source ${CURDIR}/.env
 
 COOKIES=$(curl -c - --request POST \
   --url https://api.simpel.nl/login \
@@ -12,9 +13,9 @@ INVOICE=$(curl -c ./temp.cookie --cookie <(echo "$COOKIES") --request GET \
   --url https://mijn.simpel.nl/api/invoice/latest?sid=$SID \
   --header 'Content-Type: application/json' | jq '.[0]')
 
-COOKIE=$(cat ./temp.cookie)
+COOKIE=$(cat ${CURDIR}/temp.cookie)
 
-rm ./temp.cookie
+rm ${CURDIR}/temp.cookie
 
 INVOICE_ID=$(echo "$INVOICE" | jq -r '.number')
 INVOICE_DATE=$(echo "$INVOICE" | jq -r '.invoiceDate')
@@ -28,7 +29,7 @@ fi
 INVOICE_FILE=invoice-${INVOICE_DATE}.pdf
 
 curl --cookie <(echo "$COOKIE") \
-  "https://mijn.simpel.nl/facturen/${INVOICE_ID}/pdf?sid=${SID}" > ./${INVOICE_FILE}
+  "https://mijn.simpel.nl/facturen/${INVOICE_ID}/pdf?sid=${SID}" > ${CURDIR}/${INVOICE_FILE}
 
 #TODO: upload to BonusTool with api (set fields correctly and stuff)
 
@@ -42,7 +43,7 @@ EXPENSE_ID=$(curl --request POST \
   -F "description=Simpel Invoice ${INVOICE_DATE}" \
   -F "amount=${INVOICE_PRICE}" \
   -F "company=Simpel" \
-  -F "receipt=@./${INVOICE_FILE}" \
+  -F "receipt=@${CURDIR}/${INVOICE_FILE}" \
   -F "date=${FORMATTED_DATE}" | jq '.id')
 
 rm ./invoice-*
